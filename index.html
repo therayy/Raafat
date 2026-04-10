@@ -1,190 +1,1024 @@
-import React from "react";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raafat.tech | Lead Platform Engineer</title>
+    <meta
+      name="description"
+      content="Raafat Abaid (Ray) helps organizations modernize infrastructure, reduce technical debt, and accelerate platform engineering through Kubernetes, OpenShift, GitOps, automation, security, and cloud-native architecture."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a1118;
+        --bg-soft: #101a24;
+        --panel: rgba(17, 25, 35, 0.92);
+        --panel-strong: #131f2b;
+        --line: rgba(112, 148, 170, 0.16);
+        --text: #eaf0f5;
+        --muted: #98a8b6;
+        --accent: #66b7aa;
+        --accent-strong: #92d3c8;
+        --gold: #c8af72;
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      }
 
-// Assets
-const profileImage = "/mnt/data/ChatGPT Image Mar 2, 2026, 11_17_46 AM.png";
-const mediaPreviewImage = "/mnt/data/Screenshot 2026-04-09 at 3.00.26 PM.png";
+      * {
+        box-sizing: border-box;
+      }
 
-// ---------- ICON SYSTEM (no external deps) ----------
-function IconBase({ className = "h-5 w-5", children }) {
-  return (
-    <span className={`inline-flex items-center justify-center ${className}`}>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
-        {children}
-      </svg>
-    </span>
-  );
-}
+      html {
+        scroll-behavior: smooth;
+      }
 
-function GithubIcon(props) {
-  return (
-    <IconBase {...props}>
-      <path d="M9 18c-4 1.2-4-2-6-2" />
-      <path d="M15 22v-3.2a3.5 3.5 0 0 0-1-2.5c3.3-.4 6.8-1.6 6.8-7.1A5.5 5.5 0 0 0 19.2 5 5 5 0 0 0 19 1s-1.3-.4-4.2 1.6a14.4 14.4 0 0 0-7.6 0C4.3.6 3 1 3 1a5 5 0 0 0-.2 4A5.5 5.5 0 0 0 1.2 9.2c0 5.5 3.5 6.7 6.8 7.1a3.1 3.1 0 0 0-.9 2.5V22" />
-    </IconBase>
-  );
-}
+      body {
+        margin: 0;
+        font-family: "Manrope", sans-serif;
+        color: var(--text);
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          radial-gradient(circle at top, rgba(38, 63, 83, 0.34), transparent 42%),
+          var(--bg);
+        background-size: 52px 52px, 52px 52px, auto, auto;
+      }
 
-function LinkedinIcon(props) {
-  return (
-    <IconBase {...props}>
-      <path d="M16 8a4 4 0 0 1 4 4v7h-4v-7a1 1 0 0 0-2 0v7h-4v-11h4v1.5A4.8 4.8 0 0 1 16 8Z" />
-      <rect x="4" y="9" width="4" height="10" />
-      <circle cx="6" cy="5" r="1" fill="currentColor" stroke="none" />
-    </IconBase>
-  );
-}
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-function MailIcon(props) {
-  return (
-    <IconBase {...props}>
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m4 7 8 6 8-6" />
-    </IconBase>
-  );
-}
+      p {
+        margin: 0;
+        line-height: 1.75;
+      }
 
-function PlayIcon(props) {
-  return (
-    <IconBase {...props}>
-      <circle cx="12" cy="12" r="9" />
-      <path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none" />
-    </IconBase>
-  );
-}
+      ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
 
-// ---------- DATA ----------
-const stats = [
-  { value: "15+", label: "Years Experience" },
-  { value: "71", label: "Certifications & Badges" },
-  { value: "2", label: "Degrees" },
-];
+      .site-shell {
+        min-height: 100vh;
+      }
 
-const topics = [
-  "OpenShift",
-  "Kubernetes",
-  "Ansible",
-  "GitOps",
-  "Argo CD",
-  "Helm",
-  "Terraform",
-  "Vault",
-  "Nomad",
-  "Docker",
-  "GitHub Actions",
-  "CI/CD",
-];
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem 3rem;
+        backdrop-filter: blur(16px);
+        background: rgba(9, 14, 21, 0.82);
+        border-bottom: 1px solid var(--line);
+      }
 
-const testimonials = [
-  {
-    name: "Sunmbal Raza",
-    quote: "Ray delivered an excellent OpenShift training. Clear, engaging, and highly practical.",
-  },
-  {
-    name: "John Webb",
-    quote: "Ray combines deep technical expertise with strong problem-solving ability. A true asset.",
-  },
-  {
-    name: "Adolfo Loustaunau",
-    quote: "Strong technical depth in OpenShift and outstanding client-facing skills.",
-  },
-];
+      .topbar__brand,
+      .topbar__nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
 
-// ---------- COMPONENT ----------
-export default function RaySpeakingSite() {
-  return (
-    <div className="min-h-screen bg-[#03111d] text-white">
+      .topbar__brand {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.75rem;
+        color: var(--accent-strong);
+      }
 
-      {/* HERO */}
-      <section className="max-w-6xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      .topbar__nav a {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--muted);
+      }
 
-        <div>
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-            Platform Engineering That Scales
-          </h1>
+      .topbar__nav a:hover,
+      .topbar__nav a:focus-visible {
+        color: var(--accent-strong);
+      }
 
-          <p className="mt-6 text-base text-slate-300">
-            I help organizations modernize infrastructure, migrate workloads, reduce technical debt, and accelerate platform engineering.
-          </p>
+      .dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
 
-          {/* ICON LINKS */}
-          <div className="mt-6 flex gap-6 text-cyan-400">
-            <a href="https://github.com/therayy" target="_blank">
-              <GithubIcon className="h-6 w-6" />
-            </a>
-            <a href="https://www.linkedin.com/in/raafatadly/" target="_blank">
-              <LinkedinIcon className="h-6 w-6" />
-            </a>
-            <a href="mailto:contact@raafat.tech">
-              <MailIcon className="h-6 w-6" />
-            </a>
-          </div>
+      main {
+        padding: 0 2rem 5rem;
+      }
+
+      .hero,
+      .section,
+      .stats,
+      .ticker {
+        max-width: 1380px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.8fr);
+        gap: 2rem;
+        padding: 5.5rem 1rem 3rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 0.76rem;
+        color: var(--accent-strong);
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: currentColor;
+      }
+
+      .hero__name {
+        margin-top: 1.5rem;
+        color: rgba(234, 240, 245, 0.74);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.45em;
+      }
+
+      .hero h1,
+      .section h2 {
+        margin: 0.9rem 0 1rem;
+        font-family: "Instrument Serif", serif;
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+      }
+
+      .hero h1 {
+        max-width: 13ch;
+        font-size: clamp(3rem, 6vw, 5rem);
+      }
+
+      .hero__summary,
+      .section__intro p:last-child {
+        max-width: 64ch;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .hero__tags,
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.6rem;
+      }
+
+      .hero__tags span,
+      .pill-row span {
+        border: 1px solid rgba(102, 183, 170, 0.22);
+        background: rgba(14, 26, 37, 0.84);
+        color: var(--accent-strong);
+        padding: 0.7rem 0.95rem;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-top: 2rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3.25rem;
+        padding: 0.95rem 1.3rem;
+        border: 1px solid transparent;
+        background: var(--accent);
+        color: #071016;
+        font-weight: 800;
+        font-size: 0.84rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        transition: transform 160ms ease, background 160ms ease, color 160ms ease,
+          border-color 160ms ease;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-1px);
+        background: var(--accent-strong);
+      }
+
+      .button--ghost {
+        background: transparent;
+        color: var(--accent-strong);
+        border-color: rgba(102, 183, 170, 0.22);
+      }
+
+      .button--small {
+        min-height: 2.75rem;
+        padding: 0.7rem 1rem;
+      }
+
+      .hero__panel {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .hero-card,
+      .media-card,
+      .quote-card,
+      .service-card,
+      .contact__panel,
+      .timeline__item {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card {
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -10% -20% 45%;
+        height: 180px;
+        background: radial-gradient(circle, rgba(102, 183, 170, 0.2), transparent 68%);
+        pointer-events: none;
+      }
+
+      .hero-card h2,
+      .media-card__copy h3,
+      .quote-card h3,
+      .service-card h3,
+      .contact__panel h3,
+      .timeline__content h3 {
+        margin: 0.75rem 0 1rem;
+        font-size: 1.35rem;
+        line-height: 1.2;
+      }
+
+      .hero-card p + p {
+        margin-top: 1rem;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 1rem;
+        background: var(--line);
+      }
+
+      .stat {
+        padding: 1.8rem;
+        background: rgba(11, 18, 26, 0.92);
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: clamp(2rem, 4vw, 3.1rem);
+        line-height: 1;
+        margin-bottom: 0.4rem;
+      }
+
+      .stat span {
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.72rem;
+      }
+
+      .ticker {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-top: 0;
+        background: rgba(10, 17, 24, 0.92);
+      }
+
+      .ticker__track {
+        display: flex;
+        gap: 2rem;
+        min-width: max-content;
+        padding: 1rem 1.25rem;
+        color: rgba(152, 168, 182, 0.85);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.72rem;
+      }
+
+      .ticker__track span::before {
+        content: "•";
+        color: var(--accent);
+        margin-right: 0.65rem;
+      }
+
+      .section {
+        padding: 6rem 1rem 0;
+      }
+
+      .section__intro {
+        margin-bottom: 2rem;
+      }
+
+      .section h2 {
+        font-size: clamp(2.25rem, 4vw, 3.4rem);
+      }
+
+      .media-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      }
+
+      .media-card__video {
+        min-height: 420px;
+      }
+
+      .media-card__video iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
+        border: 0;
+      }
+
+      .media-card__copy {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        background: var(--panel-strong);
+      }
+
+      .media-card__copy p:not(.eyebrow) {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .grid--three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .quote-card,
+      .service-card {
+        padding: 1.8rem;
+      }
+
+      .quote-card {
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .quote-card p {
+        color: #dce5eb;
+        font-size: 1rem;
+      }
+
+      .quote-card span,
+      .timeline__meta span,
+      .timeline__meta strong {
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .quote-card--accent {
+        border-color: rgba(200, 175, 114, 0.28);
+        background: linear-gradient(180deg, rgba(21, 29, 39, 0.94), rgba(18, 24, 32, 0.94));
+      }
+
+      .quote-card--accent a {
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.8rem;
+      }
+
+      .service-card p,
+      .timeline__content p,
+      .contact__panel a,
+      .contact__panel li {
+        color: var(--muted);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .timeline__item {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+      }
+
+      .timeline__meta {
+        padding: 1.5rem;
+        border-right: 1px solid var(--line);
+        background: rgba(11, 18, 26, 0.8);
+      }
+
+      .timeline__meta strong {
+        display: block;
+        margin-top: 0.65rem;
+      }
+
+      .timeline__content {
+        padding: 1.5rem;
+      }
+
+      .timeline__content ul {
+        margin-top: 1rem;
+      }
+
+      .contact__layout {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .contact__panel {
+        padding: 1.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.95rem;
+      }
+
+      .contact__links {
+        display: flex;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+        margin-top: 0.2rem;
+      }
+
+      .icon-link {
+        width: 46px;
+        height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(102, 183, 170, 0.22);
+        background: rgba(14, 26, 37, 0.84);
+        color: var(--accent-strong);
+        transition: transform 160ms ease, border-color 160ms ease, color 160ms ease;
+      }
+
+      .icon-link:hover,
+      .icon-link:focus-visible {
+        transform: translateY(-1px);
+        border-color: rgba(146, 211, 200, 0.42);
+        color: #ffffff;
+      }
+
+      .icon-link svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+
+      .contact__panel a:hover,
+      .contact__panel a:focus-visible,
+      .quote-card--accent a:hover,
+      .quote-card--accent a:focus-visible {
+        color: var(--accent-strong);
+      }
+
+      @media (max-width: 1100px) {
+        .hero,
+        .media-card,
+        .timeline__item,
+        .contact__layout {
+          grid-template-columns: 1fr;
+        }
+
+        .stats,
+        .grid--three {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .timeline__meta {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .topbar,
+        main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .hero {
+          padding-top: 3.5rem;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.6rem, 12vw, 4rem);
+        }
+
+        .stats,
+        .grid--three {
+          grid-template-columns: 1fr;
+        }
+
+        .media-card__video,
+        .media-card__video iframe {
+          min-height: 260px;
+        }
+
+        .button,
+        .button--ghost,
+        .button--small {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div class="topbar__brand">
+          <span>Raafat.tech</span>
+          <span class="dot"></span>
+          <a href="mailto:contact@raafat.tech">contact@raafat.tech</a>
         </div>
+        <nav class="topbar__nav">
+          <a href="#home">Home</a>
+          <a href="#media">Media</a>
+          <a href="#recommendations">Recommendations</a>
+          <a href="#services">Services</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact" class="button button--small">Work With Me</a>
+        </nav>
+      </header>
 
-        <img src={profileImage} className="rounded-xl object-cover" />
-      </section>
-
-      {/* STATS */}
-      <section className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6">
-        {stats.map((s) => (
-          <div key={s.label} className="border border-cyan-500/10 p-6">
-            <div className="text-3xl font-bold">{s.value}</div>
-            <div className="text-sm text-slate-400 mt-2">{s.label}</div>
-          </div>
-        ))}
-      </section>
-
-      {/* MEDIA */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-2xl md:text-3xl font-semibold">Featured Media</h2>
-
-        <div className="mt-8 relative">
-          <img src={mediaPreviewImage} className="rounded-xl" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <PlayIcon className="h-12 w-12 text-white" />
-          </div>
-        </div>
-      </section>
-
-      {/* TOPICS */}
-      <section className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl md:text-3xl font-semibold">Core Topics</h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-          {topics.map((t) => (
-            <div key={t} className="border border-cyan-500/10 p-4 text-sm">
-              {t}
+      <main>
+        <section class="hero" id="home">
+          <div class="hero__content">
+            <p class="eyebrow">Lead Platform Engineer</p>
+            <p class="hero__name">Raafat “Ray” Abaid</p>
+            <h1>
+              Modernizing infrastructure, enabling platform teams, and making
+              cloud-native delivery easier to scale.
+            </h1>
+            <p class="hero__summary">
+              I help organizations modernize infrastructure, migrate workloads,
+              reduce technical debt, and accelerate platform engineering
+              through Kubernetes, OpenShift, GitOps, automation, security,
+              cloud-native architecture, and Ansible.
+            </p>
+            <div class="hero__tags">
+              <span>Kubernetes</span>
+              <span>OpenShift</span>
+              <span>Ansible</span>
+              <span>Argo CD</span>
+              <span>GitOps</span>
+              <span>Terraform</span>
+              <span>Vault</span>
+              <span>Helm</span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-2xl md:text-3xl font-semibold">Testimonials</h2>
-
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          {testimonials.map((t) => (
-            <div key={t.name} className="border border-cyan-500/10 p-6">
-              <p className="text-slate-300">“{t.quote}”</p>
-              <div className="mt-4 text-sm text-cyan-400">{t.name}</div>
+            <div class="hero__actions">
+              <a href="#contact" class="button">Work With Me</a>
+              <a href="#experience" class="button button--ghost">View Experience</a>
+              <a href="#recommendations" class="button button--ghost">Recommendations</a>
+              <a href="#services" class="button button--ghost">Services</a>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      {/* CONTACT / AVAILABLE */}
-      <section className="max-w-6xl mx-auto px-6 pb-20">
-        <h2 className="text-2xl md:text-3xl font-semibold">Available For</h2>
+          <aside class="hero__panel">
+            <div class="hero-card">
+              <p class="eyebrow">Professional Bio</p>
+              <h2>Raafat Abaid (Ray)</h2>
+              <p>
+                Lead Platform Engineer and Technical Integration Strategist with
+                17+ years of experience driving environmental and operational
+                outcomes through cloud-native platforms, automation, and
+                secure-by-design engineering.
+              </p>
+              <p>
+                I’ve led migrations across cloud providers, reduced technical
+                debt, modernized applications and infrastructure with
+                Infrastructure as Code, and helped teams move from foundational
+                concepts to production-grade platform operations.
+              </p>
+              <p>
+                I teach and mentor engineers in OpenShift, Kubernetes,
+                Ansible, Argo CD, GitOps, Bash scripting, Helm, Terraform,
+                Vault, Nomad, Git, GitHub Actions, CI/CD, secrets management,
+                containers, observability, and platform standardization.
+              </p>
+            </div>
+          </aside>
+        </section>
 
-        <div className="mt-6 space-y-2 text-slate-300">
-          <div>OpenShift & Kubernetes Training</div>
-          <div>DevOps / GitOps Enablement</div>
-          <div>Teaching</div>
-          <div>Coaching and Mentoring</div>
-        </div>
-      </section>
+        <section class="stats">
+          <div class="stat">
+            <strong>17+</strong>
+            <span>Years Experience</span>
+          </div>
+          <div class="stat">
+            <strong>71</strong>
+            <span>Certifications &amp; Badges</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>Degrees</span>
+          </div>
+          <div class="stat">
+            <strong>Cloud</strong>
+            <span>Multi-cloud Delivery</span>
+          </div>
+          <div class="stat">
+            <strong>Zero → Ops</strong>
+            <span>Teaching &amp; Enablement</span>
+          </div>
+        </section>
 
+        <section class="ticker" aria-label="skills">
+          <div class="ticker__track">
+            <span>OpenShift</span>
+            <span>Kubernetes</span>
+            <span>Ansible</span>
+            <span>Argo CD</span>
+            <span>GitOps</span>
+            <span>Bash</span>
+            <span>Helm</span>
+            <span>Terraform</span>
+            <span>Vault</span>
+            <span>Nomad</span>
+            <span>GitHub Actions</span>
+            <span>Jenkins</span>
+            <span>Tekton</span>
+            <span>Quay</span>
+            <span>Prometheus</span>
+            <span>Grafana</span>
+          </div>
+        </section>
+
+        <section class="section" id="media">
+          <div class="section__intro">
+            <p class="eyebrow">Featured Media</p>
+            <h2>Featured Media</h2>
+            <p>
+              A featured YouTube preview for your training, platform
+              engineering, and cloud-native enablement content.
+            </p>
+          </div>
+
+          <div class="media-card">
+            <div class="media-card__video">
+              <iframe
+                src="https://www.youtube.com/embed/YsEnqWnZcME"
+                title="Raafat Abaid featured YouTube video"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="media-card__copy">
+              <p class="eyebrow">Featured Video</p>
+              <h3>Cloud-native strategy, enablement, and platform leadership</h3>
+              <p>
+                This section replaces the original speaking feature with your
+                media presence and highlights the way you teach engineers and
+                guide organizations through modernization.
+              </p>
+              <div class="pill-row">
+                <span>OpenShift</span>
+                <span>Kubernetes</span>
+                <span>GitOps</span>
+                <span>Security</span>
+              </div>
+              <a
+                class="button button--ghost"
+                href="https://www.youtube.com/watch?v=YsEnqWnZcME"
+                target="_blank"
+                rel="noreferrer"
+                >Watch on YouTube</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="recommendations">
+          <div class="section__intro">
+            <p class="eyebrow">What People Say</p>
+            <h2>Recommendations</h2>
+            <p>
+              Highlights based on the LinkedIn recommendations and client
+              feedback you shared.
+            </p>
+          </div>
+
+          <div class="grid grid--three">
+            <article class="quote-card">
+              <p>
+                “Had the opportunity to take a Red Hat OpenShift training led
+                by Ray, and it was an excellent experience. He was highly
+                knowledgeable, approachable, and engaging throughout the
+                course.”
+              </p>
+              <h3>Sumbal Raza</h3>
+              <span>Client recommendation</span>
+            </article>
+
+            <article class="quote-card">
+              <p>
+                “Ray combines deep technical knowledge with an eagerness to
+                tackle complex challenges, making him a true asset to any
+                development team. He is a strong team player and a great mentor
+                and colleague.”
+              </p>
+              <h3>John Webb</h3>
+              <span>IBM Principal, Account Technical Leader</span>
+            </article>
+
+            <article class="quote-card">
+              <p>
+                “Raafat possesses remarkable depth of knowledge in Red Hat
+                OpenShift and IBM Sterling. He has a proven track record of
+                implementing these technologies while building trust with
+                clients and colleagues.”
+              </p>
+              <h3>Adolfo Loustaunau</h3>
+              <span>IBM Automation Technical Sales Leader</span>
+            </article>
+
+            <article class="quote-card">
+              <p>
+                “Ray is the ultimate collaborator with an enthusiastic attitude
+                and offers to help individuals and teams regularly. He has
+                demonstrated his technical capabilities on numerous projects
+                with fantastic results.”
+              </p>
+              <h3>Nick Lopez</h3>
+              <span>Technical Sales Manager</span>
+            </article>
+
+            <article class="quote-card">
+              <p>
+                “Raafat was an excellent instructor and knew the subject matter
+                incredibly well. He made the learning fun and helped every step
+                of the way with expertise and technical skills.”
+              </p>
+              <h3>Scott Marshall</h3>
+              <span>Senior Director, IT Product Lead</span>
+            </article>
+
+            <article class="quote-card quote-card--accent">
+              <p>
+                Want to add full recommendations later? This section is ready
+                for expanded copy if you want to paste the complete LinkedIn
+                recommendations word-for-word.
+              </p>
+              <a
+                href="https://www.linkedin.com/in/raafatadly/"
+                target="_blank"
+                rel="noreferrer"
+                >View LinkedIn Profile</a
+              >
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="services">
+          <div class="section__intro">
+            <p class="eyebrow">Services</p>
+            <h2>How I Can Help</h2>
+            <p>
+              Hands-on support for teams, leaders, and engineers building
+              modern platform capabilities.
+            </p>
+          </div>
+
+          <div class="grid grid--three">
+            <article class="service-card">
+              <h3>Platform Modernization</h3>
+              <p>
+                Architecture guidance for Kubernetes, OpenShift, GitOps,
+                automation, secrets management, and multi-cloud platform
+                standardization.
+              </p>
+            </article>
+            <article class="service-card">
+              <h3>Teaching &amp; Enablement</h3>
+              <p>
+                Training for DevOps and platform engineers covering OpenShift,
+                Kubernetes, Helm, GitOps, Bash, Terraform, Vault, and
+                day-two operations.
+              </p>
+            </article>
+            <article class="service-card">
+              <h3>Mentoring &amp; Career Coaching</h3>
+              <p>
+                Career growth support, technical mentoring, certification
+                preparation, and practical coaching for engineers moving into
+                senior platform roles.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="experience">
+          <div class="section__intro">
+            <p class="eyebrow">Experience</p>
+            <h2>Selected Experience</h2>
+            <p>
+              Leadership across platform engineering, secure integration,
+              customer enablement, and cloud-native modernization.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline__item">
+              <div class="timeline__meta">
+                <span>Feb 2026 — Present</span>
+                <strong>HashiCorp / IBM</strong>
+              </div>
+              <div class="timeline__content">
+                <h3>
+                  Lead Solution Architect | Brand Technical Specialist
+                </h3>
+                <p>
+                  Leading solution architecture and technical strategy for
+                  cloud-native security, automation, and platform engineering
+                  initiatives across enterprise environments.
+                </p>
+                <ul>
+                  <li>
+                    Partner with executives and technical teams to design secure,
+                    scalable platform strategies centered on Kubernetes,
+                    OpenShift, Vault, automation, and modernization.
+                  </li>
+                  <li>
+                    Translate business goals into integrated technical
+                    architectures that reduce technical debt and accelerate
+                    adoption across hybrid and multi-cloud environments.
+                  </li>
+                  <li>
+                    Deliver workshops, enablement content, solution demos, and
+                    advisory guidance for platform, security, and developer
+                    teams.
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__meta">
+                <span>Dec 2024 — Dec 2025</span>
+                <strong>Red Hat</strong>
+              </div>
+              <div class="timeline__content">
+                <h3>Senior OpenShift Engineer | OpenShift &amp; Kubernetes Instructor</h3>
+                <p>
+                  Designed, deployed, and operated enterprise OpenShift
+                  environments while training engineers from fundamentals to
+                  production-grade operations.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__meta">
+                <span>Oct 2024 — Aug 2025</span>
+                <strong>HashiCorp Vault</strong>
+              </div>
+              <div class="timeline__content">
+                <h3>Lead DevOps Engineer | Technical Product Manager</h3>
+                <p>
+                  Guided Vault integration with OpenShift, led enablement
+                  strategy, automated deployments, and supported secrets
+                  management and secure workload authentication patterns.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__meta">
+                <span>Jun 2022 — Jun 2023</span>
+                <strong>IBM</strong>
+              </div>
+              <div class="timeline__content">
+                <h3>Senior DevOps Engineer - Client Engineering</h3>
+                <p>
+                  Ran client discovery, built reusable cloud assets, mentored
+                  engineers, and improved feature value while delivering hybrid
+                  and multi-cloud solutions.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__meta">
+                <span>Apr 2021 — Jun 2022</span>
+                <strong>IBM</strong>
+              </div>
+              <div class="timeline__content">
+                <h3>DevOps Engineer - Client Engineering</h3>
+                <p>
+                  Automated deployments on OpenShift and Kubernetes with GitOps,
+                  Argo CD, Helm, Jenkins, Tekton, Docker, Podman, and Bash.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section contact" id="contact">
+          <div class="section__intro">
+            <p class="eyebrow">Contact</p>
+            <h2>Work With Me</h2>
+            <p>
+              Available for architecture consulting, platform strategy,
+              mentoring, training, and technical enablement.
+            </p>
+          </div>
+
+          <div class="contact__layout">
+            <div class="contact__panel">
+              <h3>Direct Links</h3>
+              <p>Use the icons or hyperlinks below to connect directly.</p>
+              <div class="contact__links">
+                <a class="icon-link" href="mailto:contact@raafat.tech" aria-label="Email Ray" title="Email">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  </svg>
+                </a>
+                <a class="icon-link" href="https://github.com/therayy" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 18c-4 1.2-4-2-6-2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M15 22v-3.2a3.5 3.5 0 0 0-1-2.5c3.3-.4 6.8-1.6 6.8-7.1A5.5 5.5 0 0 0 19.2 5 5 5 0 0 0 19 1s-1.3-.4-4.2 1.6a14.4 14.4 0 0 0-7.6 0C4.3.6 3 1 3 1a5 5 0 0 0-.2 4A5.5 5.5 0 0 0 1.2 9.2c0 5.5 3.5 6.7 6.8 7.1a3.1 3.1 0 0 0-.9 2.5V22" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                  </svg>
+                </a>
+                <a class="icon-link" href="https://www.linkedin.com/in/raafatadly/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M16 8a4 4 0 0 1 4 4v7h-4v-7a1 1 0 0 0-2 0v7h-4v-11h4v1.5A4.8 4.8 0 0 1 16 8Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <rect x="4" y="9" width="4" height="10" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="6" cy="5" r="1" />
+                  </svg>
+                </a>
+              </div>
+              <a href="mailto:contact@raafat.tech">contact@raafat.tech</a>
+              <a href="https://github.com/therayy" target="_blank" rel="noreferrer">github.com/therayy</a>
+              <a href="https://www.linkedin.com/in/raafatadly/" target="_blank" rel="noreferrer">linkedin.com/in/raafatadly</a>
+            </div>
+
+            <div class="contact__panel">
+              <h3>Available For</h3>
+              <ul>
+                <li>Platform engineering strategy</li>
+                <li>OpenShift and Kubernetes enablement</li>
+                <li>GitOps and automation modernization</li>
+                <li>Teaching</li>
+                <li>Coaching and mentoring</li>
+                <li>Secure platform architecture</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  );
-}
+  </body>
+</html>
