@@ -4,584 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Raafat.tech | Lead Platform Engineer</title>
-  <meta name="description" content="Ray Abaid — Lead Platform Engineer, Technical Integration Strategist, and cloud-native platform expert specializing in Kubernetes, OpenShift, GitOps, Vault, automation, and platform modernization." />
   <style>
-    :root {
-      --bg: #0b1020;
-      --bg-soft: #121933;
-      --panel: rgba(255,255,255,0.06);
-      --panel-strong: rgba(255,255,255,0.1);
-      --text: #ecf2ff;
-      --muted: #b4c0dd;
-      --line: rgba(255,255,255,0.12);
-      --accent: #6aa6ff;
-      --accent-2: #7cf0d2;
-      --max: 1120px;
-      --shadow: 0 18px 40px rgba(0,0,0,0.28);
-      --radius: 24px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(106,166,255,0.22), transparent 32%),
-        radial-gradient(circle at top right, rgba(124,240,210,0.14), transparent 26%),
-        linear-gradient(180deg, #09101d 0%, #0c1326 42%, #0f1730 100%);
-      line-height: 1.6;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(9, 16, 29, 0.72);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      padding: 18px 0;
-    }
-
-    .brand {
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-
-    .brand span { color: var(--accent-2); }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus { color: var(--text); }
-
-    .hero {
-      padding: 72px 0 44px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--line);
-      color: var(--accent-2);
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 5vw, 4.8rem);
-      line-height: 1.03;
-      margin: 0 0 18px;
-      letter-spacing: -0.04em;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.08rem;
-      margin: 0 0 26px;
-      max-width: 720px;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: 0.2s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #8cc3ff);
-      color: #081120;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-secondary {
-      border-color: var(--line);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .stat {
-      padding: 16px;
-      border-radius: 18px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.35rem;
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .profile-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .profile-frame {
-      aspect-ratio: 4 / 5;
-      border-radius: 24px;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(106,166,255,0.22), rgba(124,240,210,0.16)),
-        #101933;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .profile-frame .placeholder {
-      color: #dbe7ff;
-    }
-
-    .profile-frame .placeholder strong {
-      display: block;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    section {
-      padding: 28px 0;
-    }
-
-    .section-header {
-      margin-bottom: 20px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
-      margin: 0 0 8px;
-      letter-spacing: -0.03em;
-    }
-
-    .section-header p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 760px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.18rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 18px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 18px;
-      padding: 22px;
-      border-radius: 22px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-    }
-
-    .timeline-date {
-      color: var(--accent-2);
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .timeline-item h3 {
-      margin: 0 0 6px;
-      font-size: 1.15rem;
-    }
-
-    .timeline-item .role-meta {
-      color: var(--muted);
-      margin-bottom: 10px;
-      font-size: 0.96rem;
-    }
-
-    .timeline-item ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-
-    .chip-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .chip {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--line);
-      color: #e3ecff;
-      font-size: 0.94rem;
-    }
-
-    .highlight-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .highlight strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-    }
-
-    .highlight p {
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .contact-box {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    footer {
-      padding: 34px 0 48px;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .small-note {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 920px) {
-      .hero-grid,
-      .grid-2,
-      .contact-box,
-      .highlight-list {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero {
-        padding-top: 48px;
-      }
-
-      .card,
-      .timeline-item,
-      .profile-card {
-        padding: 18px;
-      }
-    }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#0b1020; color:#fff; }
+    .container { max-width:1000px; margin:auto; padding:40px 20px; }
+    h1 { font-size:48px; margin-bottom:10px; }
+    h2 { color:#7cf0d2; margin-bottom:20px; }
+    .btn { display:inline-block; margin:10px 10px 10px 0; padding:12px 18px; background:#6aa6ff; color:#000; text-decoration:none; border-radius:8px; font-weight:bold; }
+    .section { margin-top:60px; }
+    .card { background:#121933; padding:20px; border-radius:10px; margin-top:15px; }
+    a { color:#7cf0d2; }
+    iframe { width:100%; height:400px; border:none; border-radius:10px; }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#home" class="brand">Raafat<span>.tech</span></a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#highlights">Highlights</a>
-        <a href="#contact">Contact</a>
-      </div>
+
+<div class="container">
+
+  <h1>Raafat.tech</h1>
+  <h2>Lead Platform Engineer</h2>
+
+  <p>
+    I help organizations modernize infrastructure, migrate workloads, reduce technical debt,
+    and accelerate platform engineering through Kubernetes, OpenShift, GitOps, Ansible,
+    automation, security, and cloud-native architecture.
+  </p>
+
+  <a class="btn" href="#contact">Work With Me</a>
+  <a class="btn" href="#experience">View Experience</a>
+  <a class="btn" href="#recommendations">Recommendations</a>
+  <a class="btn" href="#services">Services</a>
+
+  <div class="section" id="experience">
+    <h2>Experience</h2>
+    <div class="card">
+      <strong>Lead Solution Architect | Brand Technical Specialist, HashiCorp / IBM</strong>
+      <p>Feb 2026 – Current</p>
+      <ul>
+        <li>Leading platform engineering and cloud modernization initiatives</li>
+        <li>Driving Kubernetes, OpenShift, GitOps, and Ansible adoption</li>
+        <li>Designing scalable architectures and automation strategies</li>
+        <li>Delivering technical enablement, demos, and architecture guidance</li>
+      </ul>
     </div>
-  </nav>
+  </div>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Lead Platform Engineer</div>
-          <h1>Building modern platforms that scale, automate, and deliver real business impact.</h1>
-          <p>
-            I help organizations modernize infrastructure, migrate workloads,
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#contact">Work With Me</a>
-            <a class="btn btn-secondary" href="#experience">View Experience</a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <strong>17+ Years</strong>
-              <span>Engineering, modernization, and platform delivery</span>
-            </div>
-            <div class="stat">
-              <strong>Cloud-Native</strong>
-              <span>Kubernetes, OpenShift, GitOps, automation, and security</span>
-            </div>
-            <div class="stat">
-              <strong>Enablement</strong>
-              <span>Technical mentoring, workshops, demos, and training</span>
-            </div>
-          </div>
-        </div>
+  <div class="section" id="services">
+    <h2>Services</h2>
+    <div class="card">
+      <strong>Mentoring & Career Coaching</strong>
+      <p>Helping engineers grow into strong platform and DevOps professionals.</p>
+    </div>
+    <div class="card">
+      <strong>Teaching & Enablement</strong>
+      <p>Hands-on training for DevOps and Platform Engineers.</p>
+    </div>
+  </div>
 
-        <div class="profile-card">
-          <div class="profile-frame">
-  <img src="profile.jpg" alt="Ray Abaid portrait" />
+  <div class="section" id="recommendations">
+    <h2>Recommendations</h2>
+    <div class="card">
+      <p>Paste your LinkedIn recommendations here for strong social proof.</p>
+    </div>
+  </div>
+
+  <div class="section" id="video">
+    <h2>Featured Video</h2>
+    <iframe src="https://www.youtube.com/embed/YsEnqWnZcME"></iframe>
+  </div>
+
+  <div class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:contact@raafat.tech">contact@raafat.tech</a></p>
+    <p>GitHub: <a href="https://github.com/therayy" target="_blank">github.com/therayy</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/raafatadly/" target="_blank">linkedin.com/in/raafatadly</a></p>
+  </div>
+
 </div>
-          </div>
-          <div class="small-note">
-            Suggested hero image: professional portrait with clean white or neutral background.
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="about">
-      <div class="container">
-        <div class="section-header">
-          <h2>About</h2>
-          <p>
-            Lead Platform Engineer and Technical Integration Strategist with deep experience driving
-            cloud transformation, platform standardization, and operational excellence. I work across
-            infrastructure, automation, security, and developer enablement to help teams move faster with confidence.
-          </p>
-        </div>
-        <div class="grid-2">
-          <div class="card">
-            <h3>What I Focus On</h3>
-            <p>
-              Cloud-native platforms, enterprise modernization, infrastructure as code, secrets and security,
-              workload migration, operational resilience, and repeatable delivery models for high-performing teams.
-            </p>
-          </div>
-          <div class="card">
-            <h3>How I Add Value</h3>
-            <p>
-              I bridge architecture, implementation, and business outcomes—helping stakeholders align on a practical path
-              from legacy complexity to scalable, secure, and well-governed platforms.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="container">
-        <div class="section-header">
-          <h2>Experience</h2>
-          <p>A snapshot of the work, leadership, and platform expertise behind the solutions I build.</p>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-date">Oct 2024 – Aug 2025</div>
-            <div>
-              <h3>Lead DevOps Engineer | Technical Product Manager, HashiCorp Vault</h3>
-              <div class="role-meta">Costa Mesa, California</div>
-              <ul>
-                <li>Led platform and integration efforts around HashiCorp Vault and modern secrets management workflows.</li>
-                <li>Supported enterprise use cases spanning Kubernetes, OpenShift, automation, and secure delivery pipelines.</li>
-                <li>Connected technical implementation with customer value, enablement, and adoption strategy.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="timeline-item">
-            <div class="timeline-date">Prior Experience</div>
-            <div>
-              <h3>Platform Engineering, DevOps, and Cloud Enablement Leadership</h3>
-              <div class="role-meta">IBM, enterprise clients, and cloud-native transformation programs</div>
-              <ul>
-                <li>Helped organizations migrate workloads across cloud providers and modernize legacy environments.</li>
-                <li>Designed and delivered OpenShift, Kubernetes, GitOps, and automation solutions for production teams.</li>
-                <li>Built training, workshops, demos, and reusable assets to accelerate engineering capability across teams.</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="container">
-        <div class="section-header">
-          <h2>Core Skills</h2>
-          <p>Technical depth across platform engineering, automation, modernization, and developer enablement.</p>
-        </div>
-        <div class="chip-wrap">
-          <span class="chip">Kubernetes</span>
-          <span class="chip">OpenShift</span>
-          <span class="chip">GitOps</span>
-          <span class="chip">Argo CD</span>
-          <span class="chip">HashiCorp Vault</span>
-          <span class="chip">Terraform</span>
-          <span class="chip">Ansible</span>
-          <span class="chip">Helm</span>
-          <span class="chip">Cloud Migration</span>
-          <span class="chip">Platform Engineering</span>
-          <span class="chip">Infrastructure as Code</span>
-          <span class="chip">DevOps Enablement</span>
-          <span class="chip">Technical Strategy</span>
-          <span class="chip">Training & Mentoring</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="highlights">
-      <div class="container">
-        <div class="section-header">
-          <h2>Professional Highlights</h2>
-          <p>Key strengths that make this site work as both a brand page and a strong professional landing page.</p>
-        </div>
-        <div class="highlight-list">
-          <div class="card highlight">
-            <strong>Platform Modernization</strong>
-            <p>Experience helping teams reduce technical debt and move toward scalable, standardized operating models.</p>
-          </div>
-          <div class="card highlight">
-            <strong>Secure Delivery</strong>
-            <p>Hands-on work with secrets, governance, automation, and enterprise-grade delivery patterns.</p>
-          </div>
-          <div class="card highlight">
-            <strong>Technical Enablement</strong>
-            <p>Proven ability to teach, mentor, and enable engineers from foundational concepts to production execution.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="card contact-box">
-          <div>
-            <div class="section-header">
-              <h2>Contact</h2>
-              <p>
-                Ready to collaborate on platform engineering, modernization, cloud-native strategy, workshops,
-                or technical advisory work.
-              </p>
-            </div>
-            <div class="contact-actions">
-              <a class="btn btn-primary" href="mailto:ray@rayabaid.com">ray@rayabaid.com</a>
-              <a class="btn btn-secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a class="btn btn-secondary" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
-          </div>
-          <div>
-            <p class="small-note">
-              Replace the email and social links with your real details before publishing.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      © <span id="year"></span> Ray Abaid. All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
