@@ -1,85 +1,406 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raafat.tech | Lead Platform Engineer</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#0b1020; color:#fff; }
-    .container { max-width:1000px; margin:auto; padding:40px 20px; }
-    h1 { font-size:48px; margin-bottom:10px; }
-    h2 { color:#7cf0d2; margin-bottom:20px; }
-    .btn { display:inline-block; margin:10px 10px 10px 0; padding:12px 18px; background:#6aa6ff; color:#000; text-decoration:none; border-radius:8px; font-weight:bold; }
-    .section { margin-top:60px; }
-    .card { background:#121933; padding:20px; border-radius:10px; margin-top:15px; }
-    a { color:#7cf0d2; }
-    iframe { width:100%; height:400px; border:none; border-radius:10px; }
-  </style>
-</head>
-<body>
+import React from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, PlayCircle, Award, GraduationCap, Briefcase, Mail, Youtube, Linkedin, Github, BadgeCheck } from "lucide-react";
 
-<div class="container">
+const stats = [
+  { value: "15+", label: "Years Experience", icon: Briefcase },
+  { value: "71", label: "Certifications & Badges", icon: Award },
+  { value: "2", label: "Degrees", icon: GraduationCap },
+];
 
-  <h1>Raafat.tech</h1>
-  <h2>Lead Platform Engineer</h2>
+const topics = [
+  "OpenShift",
+  "Kubernetes",
+  "Ansible",
+  "Argo CD",
+  "GitOps",
+  "Helm Charts",
+  "Terraform",
+  "Vault",
+  "Nomad",
+  "GitHub Actions",
+  "Bash Scripting",
+  "Package Management",
+  "Docker",
+  "Podman",
+  "Tekton",
+  "Jenkins",
+];
 
-  <p>
-    I help organizations modernize infrastructure, migrate workloads, reduce technical debt,
-    and accelerate platform engineering through Kubernetes, OpenShift, GitOps, Ansible,
-    automation, security, and cloud-native architecture.
-  </p>
+const testimonials = [
+  {
+    name: "Sunmbal Raza",
+    role: "Global Program Management Leader",
+    quote:
+      "I had the opportunity to take a Red Hat OpenShift training led by Ray, and it was an excellent experience. He was highly knowledgeable, approachable, and engaging throughout the course. I came away with a much stronger understanding of key OpenShift concepts, deployment strategies, routing, networking, Helm charts, YAML, and practical implementation.",
+    tag: "OpenShift Training",
+  },
+  {
+    name: "John Webb",
+    role: "Principal, Account Technical Leader – IBM",
+    quote:
+      "I have had the pleasure of working with Ray over the last four years at IBM, and I am consistently impressed by his expertise and dedication. Ray combines deep technical knowledge with an eagerness to tackle complex challenges, propose innovative solutions, and foster a collaborative environment.",
+    tag: "Engineering Leadership",
+  },
+  {
+    name: "Adolfo Loustaunau",
+    role: "IBM Automation Technical Sales Leader",
+    quote:
+      "I enthusiastically recommend Raafat Abaid as a highly capable technical sales professional with strong abilities in Red Hat OpenShift, IBM Sterling, and client collaboration. He communicates complex technical concepts clearly, builds trust quickly, and consistently delivers value.",
+    tag: "Technical Sales + Platform",
+  },
+  {
+    name: "Nick Lopez",
+    role: "IBM Client Success Engineering / Technical Sales Manager",
+    quote:
+      "Ray is the ultimate collaborator. He offers help to individuals and teams regularly, mentors many others, contributes across the business, and has demonstrated technical capabilities on numerous projects with fantastic results.",
+    tag: "Mentorship",
+  },
+  {
+    name: "Scott Marshall",
+    role: "Senior Director, IT Product Lead at Cencora",
+    quote:
+      "Raafat was an excellent instructor who knew the subject matter incredibly well and was able to help us every step of the way. He made the learning experience fun, practical, and deeply informative.",
+    tag: "Client Enablement",
+  },
+];
 
-  <a class="btn" href="#contact">Work With Me</a>
-  <a class="btn" href="#experience">View Experience</a>
-  <a class="btn" href="#recommendations">Recommendations</a>
-  <a class="btn" href="#services">Services</a>
+const mediaItems = [
+  {
+    title: "Flexible Orchestration for AI & ML: Beyond Kubernetes Automation",
+    outlet: "IBM Technology YouTube",
+    desc: "Educational technical media focused on HashiCorp Nomad, real-world orchestration patterns, and modern workload strategy beyond standard Kubernetes automation.",
+    cta: "Watch Preview",
+  },
+];
 
-  <div class="section" id="experience">
-    <h2>Experience</h2>
-    <div class="card">
-      <strong>Lead Solution Architect | Brand Technical Specialist, HashiCorp / IBM</strong>
-      <p>Feb 2026 – Current</p>
-      <ul>
-        <li>Leading platform engineering and cloud modernization initiatives</li>
-        <li>Driving Kubernetes, OpenShift, GitOps, and Ansible adoption</li>
-        <li>Designing scalable architectures and automation strategies</li>
-        <li>Delivering technical enablement, demos, and architecture guidance</li>
-      </ul>
+function GridBackground() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(34,211,238,0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.09) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.12),transparent_25%),radial-gradient(circle_at_80%_30%,rgba(45,212,191,0.1),transparent_20%),radial-gradient(circle_at_50%_80%,rgba(59,130,246,0.08),transparent_25%)]" />
     </div>
-  </div>
+  );
+}
 
-  <div class="section" id="services">
-    <h2>Services</h2>
-    <div class="card">
-      <strong>Mentoring & Career Coaching</strong>
-      <p>Helping engineers grow into strong platform and DevOps professionals.</p>
+function SectionEyebrow({ children }) {
+  return (
+    <div className="mb-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-cyan-400">
+      <div className="h-px w-6 bg-cyan-400" />
+      <span>{children}</span>
     </div>
-    <div class="card">
-      <strong>Teaching & Enablement</strong>
-      <p>Hands-on training for DevOps and Platform Engineers.</p>
+  );
+}
+
+export default function RaySpeakingSite() {
+  return (
+    <div className="min-h-screen bg-[#03111d] text-white">
+      <div className="relative min-h-screen overflow-hidden">
+        <GridBackground />
+
+        <header className="sticky top-0 z-40 border-b border-cyan-500/10 bg-[#03111d]/90 backdrop-blur">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+            <div className="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-400">
+              Raafat.tech
+            </div>
+            <nav className="hidden items-center gap-8 text-xs uppercase tracking-[0.25em] text-slate-300 md:flex">
+              <a href="#home" className="text-cyan-400">Home</a>
+              <a href="#media">Media</a>
+              <a href="#about">About</a>
+              <a href="#topics">Topics</a>
+              <a href="#reviews">Reviews</a>
+              <a href="#contact">Contact</a>
+            </nav>
+            <a
+              href="#contact"
+              className="rounded-md border border-cyan-400/30 bg-teal-400 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-black transition hover:opacity-90"
+            >
+              Book Ray
+            </a>
+          </div>
+        </header>
+
+        <main id="home" className="relative z-10">
+          <section className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:px-10 lg:py-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-3xl"
+            >
+              <SectionEyebrow>Lead Platform Engineer · Technical Integration Strategist</SectionEyebrow>
+              <div className="mb-3 text-sm uppercase tracking-[0.45em] text-slate-400">Raafat "Ray" Abaid</div>
+              <h1 className="max-w-4xl text-5xl font-black uppercase leading-[0.95] text-white md:text-7xl">
+                Platform
+                <br />
+                Engineering
+                <br />
+                That Scales
+              </h1>
+              <div className="mt-5 flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.28em] text-cyan-400">
+                <span>OpenShift Instructor</span>
+                <span>•</span>
+                <span>Kubernetes Strategist</span>
+                <span>•</span>
+                <span>DevOps Enablement Leader</span>
+              </div>
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300">
+                I help organizations modernize infrastructure, migrate workloads, reduce technical debt,
+                and accelerate platform engineering through Kubernetes, OpenShift, GitOps, automation,
+                security, and cloud-native architecture.
+              </p>
+              <div className="mt-6 inline-flex rounded-md border border-amber-300/25 bg-amber-200/8 px-4 py-3 text-xs uppercase tracking-[0.28em] text-amber-300">
+                Featured Media · Technical Education · Real-world Enablement
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href="#contact"
+                  className="rounded-md bg-teal-400 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-black transition hover:opacity-90"
+                >
+                  Book a Training or Workshop
+                </a>
+                <a
+                  href="#media"
+                  className="rounded-md border border-cyan-400/30 px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-cyan-300 transition hover:bg-cyan-400/10"
+                >
+                  View Featured Media →
+                </a>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-300">
+                <a className="inline-flex items-center gap-2 hover:text-cyan-300" href="https://github.com/therayy" target="_blank" rel="noreferrer">
+                  <Github className="h-4 w-4" /> GitHub
+                </a>
+                <a className="inline-flex items-center gap-2 hover:text-cyan-300" href="https://www.linkedin.com/in/raafatadly/" target="_blank" rel="noreferrer">
+                  <Linkedin className="h-4 w-4" /> LinkedIn
+                </a>
+                <a className="inline-flex items-center gap-2 hover:text-cyan-300" href="mailto:contact@raafat.tech">
+                  <Mail className="h-4 w-4" /> contact@raafat.tech
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="flex items-center justify-center"
+            >
+              <div className="relative w-full max-w-md">
+                <div className="absolute -left-3 top-4 h-[76%] w-px bg-cyan-400/60" />
+                <div className="absolute -right-3 bottom-4 h-[76%] w-px bg-cyan-400/60" />
+                <div className="absolute -top-3 left-4 h-px w-[78%] bg-cyan-400/60" />
+                <div className="absolute -bottom-3 right-4 h-px w-[78%] bg-cyan-400/60" />
+                <div className="overflow-hidden border border-cyan-500/25 bg-black p-3 shadow-[0_0_80px_rgba(34,211,238,0.08)]">
+                  <img
+                    src="/mnt/data/ChatGPT Image Mar 2, 2026, 11_17_46 AM.png"
+                    alt="Raafat Abaid"
+                    className="h-[560px] w-full object-cover"
+                  />
+                  <div className="mt-3 inline-flex items-center gap-2 border border-cyan-500/20 bg-[#061827] px-4 py-2 text-[11px] uppercase tracking-[0.3em] text-cyan-300">
+                    <BadgeCheck className="h-3.5 w-3.5" /> Lead Platform Engineer · Instructor · Strategist
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          <section className="border-y border-cyan-500/10 bg-[#041523]/80">
+            <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
+              <div className="grid gap-6 md:grid-cols-3">
+                {stats.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.label} className="border border-cyan-500/10 bg-[#071a2a]/70 p-6">
+                      <div className="mb-4 inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/5 p-3 text-cyan-300">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="text-5xl font-black text-white">{item.value}</div>
+                      <div className="mt-2 text-xs uppercase tracking-[0.3em] text-slate-400">{item.label}</div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-cyan-500/10 pt-5 text-[11px] uppercase tracking-[0.28em] text-slate-400">
+                <span className="text-cyan-300">Lead Platform Engineer</span>
+                <span>OpenShift & Kubernetes Instructor</span>
+                <span>GitOps Practitioner</span>
+                <span>HashiCorp Vault & Nomad</span>
+                <span>Ansible & Terraform</span>
+                <span>Cloud / Hybrid / On-Prem</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="media" className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+            <SectionEyebrow>Featured Media</SectionEyebrow>
+            <h2 className="text-4xl font-serif text-white md:text-6xl">Featured Media</h2>
+            <p className="mt-4 max-w-2xl text-lg text-slate-400">
+              Educational media, technical demos, and platform engineering content focused on real-world cloud-native delivery.
+            </p>
+
+            <div className="mt-12 grid overflow-hidden border border-cyan-500/10 bg-[#071828]/70 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="relative min-h-[360px] bg-black">
+                <img
+                  src="/mnt/data/Screenshot 2026-04-09 at 3.00.26 PM.png"
+                  alt="Featured YouTube preview"
+                  className="h-full w-full object-cover opacity-85"
+                />
+                <div className="absolute left-6 top-6 inline-flex items-center gap-2 bg-amber-200 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-black">
+                  <Youtube className="h-3.5 w-3.5" /> Featured Media
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="rounded-full border border-white/20 bg-black/45 p-6 text-white backdrop-blur-sm">
+                    <PlayCircle className="h-14 w-14" />
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center p-8 lg:p-12">
+                <div className="text-sm font-bold uppercase tracking-[0.3em] text-amber-300">IBM Technology / YouTube</div>
+                <div className="mt-3 text-xs uppercase tracking-[0.3em] text-cyan-400">Technical Video · Platform Orchestration · Education</div>
+                <h3 className="mt-4 text-3xl font-serif text-white">Flexible Orchestration for AI & ML: Beyond Kubernetes Automation</h3>
+                <p className="mt-5 text-base leading-8 text-slate-300">
+                  A featured technical video showcasing modern orchestration patterns, HashiCorp Nomad concepts,
+                  and practical approaches to running mixed workloads across modern platforms.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <span className="border border-amber-300/35 px-3 py-2 text-xs uppercase tracking-[0.22em] text-amber-200">Nomad</span>
+                  <span className="border border-amber-300/35 px-3 py-2 text-xs uppercase tracking-[0.22em] text-amber-200">AI/ML Workloads</span>
+                  <span className="border border-amber-300/35 px-3 py-2 text-xs uppercase tracking-[0.22em] text-amber-200">Kubernetes Strategy</span>
+                </div>
+                <div className="mt-8 flex gap-4">
+                  <a href="#contact" className="rounded-md border border-cyan-400/25 px-5 py-3 text-sm uppercase tracking-[0.2em] text-cyan-300 hover:bg-cyan-400/10">
+                    Request Media Kit
+                  </a>
+                  <button className="rounded-md bg-teal-400 px-5 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black">
+                    Watch Preview
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="about" className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+            <SectionEyebrow>About Ray</SectionEyebrow>
+            <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+              <div>
+                <h2 className="text-4xl font-serif text-white md:text-6xl">Technical leadership, enablement, and platform modernization.</h2>
+              </div>
+              <div className="space-y-6 text-lg leading-8 text-slate-300">
+                <p>
+                  Raafat (Ray) Abaid is a Lead Platform Engineer and Technical Integration Strategist with 15+ years of experience helping organizations modernize applications and infrastructure across hybrid, cloud, and on-prem environments.
+                </p>
+                <p>
+                  He teaches and enables engineers across OpenShift, Kubernetes, Ansible, Argo CD, GitOps, Bash scripting, Helm, package management, Terraform, Git, GitHub Actions, Vault, Nomad, Docker, Podman, Jenkins, Tekton, observability, and secure delivery practices.
+                </p>
+                <p>
+                  Ray is known for blending deep technical expertise with practical teaching, hands-on workshops, architecture strategy, and real-world implementation guidance that takes teams from foundations to production-grade operations.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="topics" className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+            <SectionEyebrow>Topics & Expertise</SectionEyebrow>
+            <h2 className="text-4xl font-serif text-white md:text-6xl">Core Topics</h2>
+            <p className="mt-4 max-w-2xl text-lg text-slate-400">
+              Workshops, mentoring, technical enablement, and speaking topics aligned to modern platform engineering.
+            </p>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {topics.map((topic) => (
+                <div key={topic} className="rounded-2xl border border-cyan-500/10 bg-[#071828]/65 px-5 py-5 text-sm font-medium text-slate-200 shadow-[0_0_30px_rgba(34,211,238,0.03)]">
+                  {topic}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="reviews" className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+            <SectionEyebrow>What People Say</SectionEyebrow>
+            <h2 className="text-4xl font-serif text-white md:text-6xl">Testimonials</h2>
+            <p className="mt-4 max-w-2xl text-lg text-slate-400">
+              Feedback from clients, colleagues, students, and leaders who worked with Ray across enablement, delivery, and technical strategy.
+            </p>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {testimonials.map((item, idx) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: idx * 0.05 }}
+                  className={`min-h-[280px] border p-7 ${idx === 1 ? "border-cyan-500/20 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%),#071828]" : "border-cyan-500/10 bg-[#071828]/70"}`}
+                >
+                  <div className="text-5xl leading-none text-cyan-400/60">“</div>
+                  <p className="mt-4 text-lg italic leading-8 text-slate-200">{item.quote}</p>
+                  <div className="mt-8">
+                    <div className="font-semibold text-white">{item.name}</div>
+                    <div className="mt-1 text-sm text-slate-400">{item.role}</div>
+                    <div className="mt-3 text-xs uppercase tracking-[0.28em] text-cyan-400">{item.tag}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
+          <section id="contact" className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+            <SectionEyebrow>Get in Touch</SectionEyebrow>
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <h2 className="text-4xl font-serif text-white md:text-6xl">Request Training, Mentoring, or Speaking</h2>
+                <p className="mt-4 max-w-2xl text-lg text-slate-400">
+                  Available for workshops, enablement sessions, architecture advisory, platform engineering coaching, and technical speaking.
+                </p>
+
+                <div className="mt-8 grid gap-4">
+                  <input className="border border-cyan-500/15 bg-[#071828]/80 px-5 py-4 text-slate-200 outline-none placeholder:text-slate-500" placeholder="Your name" />
+                  <input className="border border-cyan-500/15 bg-[#071828]/80 px-5 py-4 text-slate-200 outline-none placeholder:text-slate-500" placeholder="your@email.com" />
+                  <input className="border border-cyan-500/15 bg-[#071828]/80 px-5 py-4 text-slate-200 outline-none placeholder:text-slate-500" placeholder="Organization" />
+                  <input className="border border-cyan-500/15 bg-[#071828]/80 px-5 py-4 text-slate-200 outline-none placeholder:text-slate-500" placeholder="Topic or training request" />
+                  <textarea className="min-h-[180px] border border-cyan-500/15 bg-[#071828]/80 px-5 py-4 text-slate-200 outline-none placeholder:text-slate-500" placeholder="Tell me about your event, training goals, team size, or platform needs..." />
+                  <button className="rounded-md bg-teal-400 px-6 py-4 text-sm font-bold uppercase tracking-[0.2em] text-black">Send Request</button>
+                </div>
+              </div>
+
+              <div className="space-y-5">
+                <div className="border border-cyan-500/10 bg-[#071828]/70 p-6">
+                  <div className="text-xs uppercase tracking-[0.28em] text-slate-400">Website</div>
+                  <div className="mt-3 text-xl text-cyan-300">raafat.tech</div>
+                </div>
+                <div className="border border-cyan-500/10 bg-[#071828]/70 p-6">
+                  <div className="text-xs uppercase tracking-[0.28em] text-slate-400">Email</div>
+                  <div className="mt-3 text-xl text-cyan-300">contact@raafat.tech</div>
+                </div>
+                <div className="border border-cyan-500/10 bg-[#071828]/70 p-6">
+                  <div className="text-xs uppercase tracking-[0.28em] text-slate-400">Profiles</div>
+                  <div className="mt-4 space-y-3 text-slate-200">
+                    <a href="https://www.linkedin.com/in/raafatadly/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cyan-300"><Linkedin className="h-4 w-4" /> LinkedIn <ExternalLink className="h-3.5 w-3.5" /></a>
+                    <a href="https://github.com/therayy" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-cyan-300"><Github className="h-4 w-4" /> GitHub <ExternalLink className="h-3.5 w-3.5" /></a>
+                  </div>
+                </div>
+                <div className="border border-amber-300/15 bg-amber-200/6 p-6 text-slate-300">
+                  <div className="text-xs uppercase tracking-[0.28em] text-amber-300">Available For</div>
+                  <div className="mt-4 space-y-2 leading-7">
+                    <div>OpenShift & Kubernetes Training</div>
+                    <div>DevOps / GitOps Enablement</div>
+                    <div>Mentoring & Career Coaching</div>
+                    <div>Platform Engineering Advisory</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
-  </div>
-
-  <div class="section" id="recommendations">
-    <h2>Recommendations</h2>
-    <div class="card">
-      <p>Paste your LinkedIn recommendations here for strong social proof.</p>
-    </div>
-  </div>
-
-  <div class="section" id="video">
-    <h2>Featured Video</h2>
-    <iframe src="https://www.youtube.com/embed/YsEnqWnZcME"></iframe>
-  </div>
-
-  <div class="section" id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:contact@raafat.tech">contact@raafat.tech</a></p>
-    <p>GitHub: <a href="https://github.com/therayy" target="_blank">github.com/therayy</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/raafatadly/" target="_blank">linkedin.com/in/raafatadly</a></p>
-  </div>
-
-</div>
-
-</body>
-</html>
+  );
+}
